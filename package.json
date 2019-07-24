@@ -1,0 +1,28 @@
+{
+  "name": "awd-platform",
+  "version": "1.0.0",
+  "description": "A platform to fuck others (hope so) in CTF AWD",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evi0s/awd-platform.git"
+  },
+  "keywords": [
+    "CTF",
+    "AWD",
+    "Nodejs"
+  ],
+  "author": "evi0s",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/evi0s/awd-platform/issues"
+  },
+  "homepage": "https://github.com/evi0s/awd-platform#readme",
+  "dependencies": {
+    "@types/node": "^12.6.8"
+  }
+}
