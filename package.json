@@ -23,6 +23,16 @@
   },
   "homepage": "https://github.com/evi0s/awd-platform#readme",
   "dependencies": {
-    "@types/node": "^12.6.8"
+    "@types/debug": "^4.1.4",
+    "@types/node": "^12.6.8",
+    "debug": "^4.1.1"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.7",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3"
   }
 }
