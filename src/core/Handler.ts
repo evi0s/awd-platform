@@ -1,5 +1,6 @@
-import * as debug from 'debug'
+import * as debug from "debug"
 import * as net from "net";
+import { HandlerEventLoop } from "./Midware";
 
 const Debugger = debug('Handler');
 
@@ -25,7 +26,7 @@ class Socket {
         }
 
         // Event: data
-        this.socket.on('data', this.DataHandler);
+        this.socket.on('data', this.DataHandler.bind(this));
 
         // Event: close
         this.socket.on('close', Socket.CloseHandler);
@@ -53,6 +54,7 @@ class Socket {
 
     private DataHandler (data: Buffer) {
         Debugger(`Got new data: ${data.toString('utf-8')}`);
+        HandlerEventLoop.emit('newData', this.serverId, this.id, data.toString('utf-8'));
     }
 
     private static CloseHandler () {
@@ -62,6 +64,10 @@ class Socket {
     private static ErrorHandler (error: Error) {
         Debugger(`Error: ${error.message}`);
         console.log("An error has occurred!");
+    }
+
+    public sendData(data: string) {
+        this.socket.write(Buffer.from(data));
     }
 }
 
@@ -142,6 +148,21 @@ class Handler {
 
         // Closing server
         this.Server.close();
+    }
+
+    public sendToSocket(_id: number, data: string) {
+
+        // Check socket id
+        if (_id > this.clientNum) {
+            throw new Error(`Invalid socket id: ${_id}`);
+        }
+
+        // Check socket status
+        if (this.Sockets[_id].getStatus()) {
+            throw new Error(`Socket ${_id} has closed!`);
+        }
+
+        this.Sockets[_id].sendData(data);
     }
 }
 
